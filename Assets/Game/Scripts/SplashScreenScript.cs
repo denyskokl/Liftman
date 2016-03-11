@@ -5,10 +5,10 @@ using UnityEngine.SceneManagement;
 public class SplashScreenScript : MonoBehaviour {
 
 
-	private int startGame = 3;
+	private int startGame = 0;
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("```");
+		startGame = 10;
 	}
 	
 	// Update is called once per frame
