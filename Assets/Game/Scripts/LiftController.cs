@@ -6,7 +6,7 @@ public class LiftController : MonoBehaviour {
  private Vector3 MouseLastPosition;
 
    public float speed;
-  [SerializeField] private Collider2D touchArea;
+  [SerializeField] private CameraScript camera;
   private Rigidbody2D _rigidbody2D;
 
   void Awake()
@@ -42,18 +42,8 @@ public class LiftController : MonoBehaviour {
     _rigidbody2D.AddForce(new Vector2(0, -touch.y), ForceMode2D.Force);
    }
 
-  void OnTriggerEnter(Collider collider)
+  void OnTriggerEnter2D(Collider2D collider)
   {
-    Debug.Log("OnTriggerEnter");
-  }
-
-  void OnTriggerExit()
-  {
-    Debug.Log("OnTriggerExit");
-  }
-
-  void OnTriggerStay()
-  {
-      Debug.Log("OnTriggerStay");
+    Debug.Log("OnTriggerEnter" + collider.name);
   }
 }
