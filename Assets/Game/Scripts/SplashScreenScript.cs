@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class SplashScreenScript : MonoBehaviour {
@@ -10,11 +9,11 @@ public class SplashScreenScript : MonoBehaviour {
 	void Start () {
 		startGame = 10;
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		startGame--;
-		if (startGame <= 0) 	
+		if (startGame <= 0)
 		{
 			SceneManager.LoadScene ("MainMenu");
 		}
