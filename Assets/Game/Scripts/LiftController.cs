@@ -41,4 +41,19 @@ public class LiftController : MonoBehaviour {
    {
     _rigidbody2D.AddForce(new Vector2(0, -touch.y), ForceMode2D.Force);
    }
+
+  void OnTriggerEnter(Collider collider)
+  {
+    Debug.Log("OnTriggerEnter");
+  }
+
+  void OnTriggerExit()
+  {
+    Debug.Log("OnTriggerExit");
+  }
+
+  void OnTriggerStay()
+  {
+      Debug.Log("OnTriggerStay");
+  }
 }
