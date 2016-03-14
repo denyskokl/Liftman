@@ -7,6 +7,12 @@ public class LiftController : MonoBehaviour {
 
    public float speed;
   [SerializeField] private Collider2D touchArea;
+  private Rigidbody2D _rigidbody2D;
+
+  void Awake()
+  {
+    _rigidbody2D = GetComponent<Rigidbody2D>();
+  }
 
    void Update()
    {
@@ -28,28 +34,11 @@ public class LiftController : MonoBehaviour {
    public void UpdateTouchInput()
    {
      var d = Input.GetAxis("Mouse ScrollWheel");
-       GetComponent<Rigidbody2D>().AddForce(new Vector2(0, speed*d), ForceMode2D.Force);
+       _rigidbody2D.AddForce(new Vector2(0, speed*d), ForceMode2D.Force);
    }
 
    void TouchMoved(Vector2 touch)
    {
-     GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -touch.y), ForceMode2D.Force);
+    _rigidbody2D.AddForce(new Vector2(0, -touch.y), ForceMode2D.Force);
    }
-
-  void OnTriggerEnter(Collider collider)
-  {
-    Debug.Log("OnTriggerEnter");
-  }
-
-  void OnTriggerExit()
-  {
-    Debug.Log("OnTriggerExit");
-  }
-
-  void OnTriggerStay()
-  {
-      Debug.Log("OnTriggerStay");
-  }
-
-
 }
