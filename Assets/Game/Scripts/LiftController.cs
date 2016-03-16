@@ -65,15 +65,14 @@ public class LiftController : MonoBehaviour
       {
         _rigidbody2D.velocity = Vector2.zero;
         AudioManager.CreatePlayAudioObject(AudioManager.ins.sfxLiftOpen);
-        var stageNumber = collider.name.Split(new char[]{' '},StringSplitOptions.RemoveEmptyEntries)[1];
+        var stageNumber = collider.name.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries)[1];
        _currentStage = Int32.Parse(stageNumber);
-        OnStageStay(_currentStage);
+         if(OnStageStay != null)
+            OnStageStay(_currentStage);
         Debug.Log(_currentStage);
 
       }
     }));
-
-
   }
 
   private IEnumerator StartTimer(float time, Action callback)
