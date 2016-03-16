@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
 
 public class LiftController : MonoBehaviour
@@ -7,8 +8,10 @@ public class LiftController : MonoBehaviour
 
   public float Speed;
   public float SpeedWheel;
-  [SerializeField] private CameraScript camera;
+  public static Action<int> OnStageStay { get; set; } 
+     
   private Rigidbody2D _rigidbody2D;
+  private int _currentStage;
 
   void Awake()
   {
@@ -45,10 +48,37 @@ public class LiftController : MonoBehaviour
 
   void OnTriggerEnter2D(Collider2D collider)
   {
+    if (collider.name.Contains("Stage"))
+    {
+
+      CheckStageStay(collider);
+
+    }
   }
 
-  void OnTriggerStay2D(Collider2D collider)
+  private void CheckStageStay(Collider2D collider)
   {
     Debug.Log(collider.name);
+    StartCoroutine(StartTimer(1, () =>
+    {
+      if(_rigidbody2D.IsTouching(collider))
+      {
+        _rigidbody2D.velocity = Vector2.zero;
+        AudioManager.CreatePlayAudioObject(AudioManager.ins.sfxLiftOpen);
+        var stageNumber = collider.name.Split(new char[]{' '},StringSplitOptions.RemoveEmptyEntries)[1];
+       _currentStage = Int32.Parse(stageNumber);
+        OnStageStay(_currentStage);
+        Debug.Log(_currentStage);
+
+      }
+    }));
+
+
+  }
+
+  private IEnumerator StartTimer(float time, Action callback)
+  {
+    yield return new WaitForSeconds(1f);
+    callback();
   }
 }
