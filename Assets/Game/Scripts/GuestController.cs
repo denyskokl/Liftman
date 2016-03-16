@@ -5,7 +5,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-public class GuesController : MonoBehaviour
+public class GuestController : MonoBehaviour
 {
   void Start()
   {

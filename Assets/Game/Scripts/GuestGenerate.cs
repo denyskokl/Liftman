@@ -3,9 +3,9 @@ using System.Collections;
 
 public class GuestGenerate : MonoBehaviour
 {
-  public static GuestGenerate ins = null;
+  public static GuestGenerate ins;
 
-  void Start()
+  void Awake()
   {
     if (ins == null)
     {
