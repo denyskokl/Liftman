@@ -32,7 +32,7 @@ public class GuestGenerate : MonoBehaviour
   {
     var guest = Instantiate(_guest);
     guest.transform.SetParent(gameObject.transform);
-    guest.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+    guest.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
     guest.transform.position = new Vector3(guest.transform.position.x, GenerateStages(), guest.transform.position.z);
   }
 
