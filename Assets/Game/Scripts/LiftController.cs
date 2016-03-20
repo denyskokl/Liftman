@@ -12,28 +12,46 @@ public class LiftController : MonoBehaviour
      
   private Rigidbody2D _rigidbody2D;
   private int _currentStage;
+  private bool IsCanMove = true;
 
   void Awake()
   {
     _rigidbody2D = GetComponent<Rigidbody2D>();
+    OnStageStay = (int stage) =>
+    {
+        IsCanMove = false;
+        StartCoroutine(StartTimer(4, () =>
+        {
+            IsCanMove = true;
+        }));
+
+    };
   }
 
   void Update()
   {
-    if (Application.isEditor)
-    {
-      UpdateTouchInput();
-    }
-
-    // Debug.Log(Input.touchCount);
-    if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-    {
-      Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-      touchDeltaPosition = touchDeltaPosition*Speed;
-      TouchMoved(touchDeltaPosition);
-    }
+        if(IsCanMove)
+        {
+            UpdateLiftPosition();
+        }
+    
   }
 
+    void UpdateLiftPosition()
+    {
+        if (Application.isEditor)
+        {
+            UpdateTouchInput();
+        }
+
+        // Debug.Log(Input.touchCount);
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+            touchDeltaPosition = touchDeltaPosition * Speed;
+            TouchMoved(touchDeltaPosition);
+        }
+    }
 
   public void UpdateTouchInput()
   {
@@ -43,7 +61,7 @@ public class LiftController : MonoBehaviour
 
   void TouchMoved(Vector2 touch)
   {
-    _rigidbody2D.AddForce(new Vector2(0, -touch.y), ForceMode2D.Force);
+    _rigidbody2D.AddForce(new Vector2(0, touch.y), ForceMode2D.Force);
   }
 
   void OnTriggerEnter2D(Collider2D collider)
@@ -77,7 +95,7 @@ public class LiftController : MonoBehaviour
 
   private IEnumerator StartTimer(float time, Action callback)
   {
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(time);
     callback();
   }
 }
