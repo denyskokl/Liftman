@@ -4,9 +4,11 @@ using System.Collections;
 using DG.Tweening;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 
 public class GuestController : MonoBehaviour
 {
+
   void Start()
   {
     MoveGues();
@@ -28,14 +30,8 @@ public class GuestController : MonoBehaviour
   {
     ChageFlip(false);
     transform.DOMoveX(-2f, 6f, false).OnComplete(Destroy);
-    Invoke("InvokeCreate", 3f);
-
   }
 
-  void InvokeCreate()
-  {
-    GuestGenerate.ins.CreateGuest();
-  }
 
   public void Destroy()
   {
