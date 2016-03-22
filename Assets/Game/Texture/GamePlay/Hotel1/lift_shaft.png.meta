@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5e5c26e76dac0492f91512af194562d8
-timeCreated: 1458459843
+guid: 891ca1e278f91480aa48fe3702642883
+timeCreated: 1458669465
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
@@ -30,7 +30,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: 16
+    aniso: -1
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -47,21 +47,11 @@ TextureImporter:
   spritePixelsToUnits: 100
   alphaIsTransparency: 1
   textureType: 8
-  buildTargetSettings:
-  - buildTarget: iPhone
-    maxTextureSize: 512
-    textureFormat: -1
-    compressionQuality: 50
-    allowsAlphaSplitting: 0
-  - buildTarget: Android
-    maxTextureSize: 512
-    textureFormat: -1
-    compressionQuality: 50
-    allowsAlphaSplitting: 0
+  buildTargetSettings: []
   spriteSheet:
     sprites: []
     outline: []
-  spritePackingTag: hotel1
+  spritePackingTag: 
   userData: 
   assetBundleName: 
   assetBundleVariant: 
