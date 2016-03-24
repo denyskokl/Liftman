@@ -21,9 +21,9 @@ public class GuestGenerate : MonoBehaviour
 
     public void CreateGuest(float lifeTime, Stage stage)
     {
-        var guest = Instantiate(_guest);
-        guest.transform.SetParent(gameObject.transform);
-        guest.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
-        guest.transform.position = new Vector3(guest.transform.position.x, stage.Offset, guest.transform.position.z);
+//        var guest = Instantiate(_guest);
+//        guest.transform.SetParent(gameObject.transform);
+//        guest.transform.localScale = new Vector3(0.04f, 0.04f, 0.04f);
+//        guest.transform.position = new Vector3(guest.transform.position.x, stage.Offset, guest.transform.position.z);
     }
 }

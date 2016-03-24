@@ -55,8 +55,7 @@ public class GameplayController : MonoBehaviour
     {
         var guest = Instantiate(_guest);
         guest.transform.SetParent(gameObject.transform);
-        guest.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-        guest.transform.position = new Vector3(guest.transform.position.x, stage.Offset + startPosition, guest.transform.position.z);
+            guest.transform.localPosition = new Vector3(240f, stage.Offset + startPosition, guest.transform.localPosition.z);
         guests.Add(guest);
     }
 

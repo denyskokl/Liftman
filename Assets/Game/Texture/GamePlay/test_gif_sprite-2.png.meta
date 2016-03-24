@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: ffbf2f05bf30e47df8b077adc6ace2bc
-timeCreated: 1458498657
+guid: 263fc9305c8a242349e112fa401ea897
+timeCreated: 1458854799
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: test_gif_sprite_0
-    21300002: test_gif_sprite_1
-    21300004: test_gif_sprite_2
-    21300006: test_gif_sprite_3
+    21300000: test_gif_sprite-2_0
+    21300002: test_gif_sprite-2_1
+    21300004: test_gif_sprite-2_2
+    21300006: test_gif_sprite-2_3
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,13 +48,13 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 180
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: test_gif_sprite_0
+    - name: test_gif_sprite-2_0
       rect:
         serializedVersion: 2
         x: 244
@@ -133,7 +133,7 @@ TextureImporter:
         - {x: 46.828552, y: -561.52783}
         - {x: 84.82855, y: -554.52783}
         - {x: 88.82855, y: -546.52783}
-    - name: test_gif_sprite_1
+    - name: test_gif_sprite-2_1
       rect:
         serializedVersion: 2
         x: 861
@@ -219,7 +219,7 @@ TextureImporter:
         - {x: -45.1521, y: -529.4413}
         - {x: -53.1521, y: -519.4413}
         - {x: -73.1521, y: -508.44128}
-    - name: test_gif_sprite_2
+    - name: test_gif_sprite-2_2
       rect:
         serializedVersion: 2
         x: 1884
@@ -296,7 +296,7 @@ TextureImporter:
         - {x: 91.84839, y: -556.9281}
         - {x: 93.84839, y: -540.9281}
         - {x: 74.84839, y: -526.9281}
-    - name: test_gif_sprite_3
+    - name: test_gif_sprite-2_3
       rect:
         serializedVersion: 2
         x: 2647
@@ -304,7 +304,7 @@ TextureImporter:
         width: 627
         height: 1899
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline:
       - - {x: 58.924927, y: -508.6231}
