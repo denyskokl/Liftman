@@ -26,7 +26,7 @@ public class GameplayController : MonoBehaviour
 
   void Awake()
   {
-    LiftController.OnStageStay = GuestLanding;
+    LiftController.OnStageStay += GuestLanding;
   }
 
   void Start()
@@ -42,9 +42,9 @@ public class GameplayController : MonoBehaviour
     foreach (var item in Guests)
     {
       var guest = item.GetComponent<Guest>();
-      if (guest.Destination == stageNumber)
+      if (guest.Destination == stageNumber && guest.IsClaimed)
         guest.MoveOut();
-      if (guest.StageNumber == stageNumber)
+      if (guest.StageNumber == stageNumber && !guest.IsClaimed)
         guest.MoveIn();
     }
   }

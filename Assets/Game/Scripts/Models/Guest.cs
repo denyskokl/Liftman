@@ -8,6 +8,7 @@ public class Guest : MonoBehaviour
   public int Destination { get; set; }
   public float LifeTime { get; set; }
 
+  public bool IsClaimed;
   private float lifeDuration;
 
   public Guest(int stageNumber, int destination, float lifeTime)
@@ -27,17 +28,17 @@ public class Guest : MonoBehaviour
   public void MoveIn()
   {
     transform.DOMoveX(2, 2f);
+    IsClaimed = true;
   }
 
-   // Temporal coordinates Fix it
+  // Temporal coordinates Fix it
   public void MoveOut()
   {
-     transform.DOMoveX(-2, 2f);
+    transform.DOMoveX(-2, 2f);
   }
 
   private void MoveGuest()
   {
-
     transform.DOLocalMoveX(-7.8f, 6f).OnComplete(StopMoving);
   }
 
