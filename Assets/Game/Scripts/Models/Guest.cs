@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Guest : MonoBehaviour
 {
@@ -23,22 +22,23 @@ public class Guest : MonoBehaviour
   }
 
 
-  // Temporal coordinates. Fix it
-  public void MoveIn()
-  {
-    transform.DOMoveX(2, 2f);
-  }
 
-   // Temporal coordinates Fix it
-  public void MoveOut()
-  {
-     transform.DOMoveX(-2, 2f);
-  }
+    public void MoveIn()
+    {
+      transform.DOMoveX(2, 2f);
+    }
 
-  private void MoveGuest()
-  {
+     // Temporal coordinates Fix it
+    public void MoveOut()
+    {
+       transform.DOMoveX(-2, 2f);
+    }
 
-    transform.DOLocalMoveX(-7.8f, 6f).OnComplete(StopMoving);
+
+  public void MoveGuest()
+  {
+    ChageFlip(true);
+    transform.DOMoveX(-0.11f, 6f, false).OnComplete(StopMoving);
   }
 
   private void StopMoving()
@@ -47,10 +47,10 @@ public class Guest : MonoBehaviour
   }
 
 
-  private void MoveBack()
+  public void MoveBack()
   {
-    transform.rotation = Quaternion.Euler(Vector3.back);
-    transform.DOLocalMoveX(160f, 8f).OnComplete(Destroy);
+    ChageFlip(false);
+    transform.DOMoveX(0.9f, 6f, false).OnComplete(Destroy);
   }
 
 
@@ -58,5 +58,10 @@ public class Guest : MonoBehaviour
   {
     GameplayController.RemoveGuest(gameObject);
     Destroy(gameObject);
+  }
+
+  private void ChageFlip(bool status)
+  {
+    transform.GetComponent<SpriteRenderer>().flipX = status;
   }
 }
