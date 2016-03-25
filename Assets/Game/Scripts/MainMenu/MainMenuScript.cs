@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class PlayGameMoving : MonoBehaviour
+public class MainMenuScript : MonoBehaviour
 {
   [SerializeField] private Camera mainCamera;
 
