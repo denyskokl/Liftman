@@ -17,7 +17,7 @@ public class LiftController : MonoBehaviour
   void Awake()
   {
     _rigidbody2D = GetComponent<Rigidbody2D>();
-    OnStageStay = (int stage) =>
+    OnStageStay += (int stage) =>
     {
         IsCanMove = false;
         StartCoroutine(StartTimer(4, () =>

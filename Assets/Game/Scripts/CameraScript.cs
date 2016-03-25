@@ -10,7 +10,7 @@ public class CameraScript : MonoBehaviour
 
   void Update()
   {
-      if (target.transform.position.y < 5f && target.transform.position.y > -5.55f)
+      if (target.transform.position.y < 615f && target.transform.position.y > -5.55f)
       {
         transform.position = new Vector3(transform.position.x, target.transform.position.y, 0);
         touchArea.transform.position  = new Vector3(transform.position.x, target.transform.position.y - 3f, 0);
