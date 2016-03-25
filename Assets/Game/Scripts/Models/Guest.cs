@@ -23,6 +23,18 @@ public class Guest : MonoBehaviour
   }
 
 
+  // Temporal coordinates. Fix it
+  public void MoveIn()
+  {
+    transform.DOMoveX(2, 2f);
+  }
+
+   // Temporal coordinates Fix it
+  public void MoveOut()
+  {
+     transform.DOMoveX(-2, 2f);
+  }
+
   private void MoveGuest()
   {
 
