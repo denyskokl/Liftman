@@ -62,7 +62,7 @@ public class GameplayController : MonoBehaviour
  var guest = Instantiate(_guest);
         guest.transform.SetParent(gameObject.transform);
         guest.transform.localScale = new Vector3(0.35f, 0.35f, 0.35f);
-        guest.transform.position = new Vector3(0.8f, stage.Offset + _startPosition, guest.transform.position.z);
+        guest.transform.position = new Vector3(0, 0, guest.transform.position.z);
         Guests.Add(guest);
   }
 
@@ -81,7 +81,6 @@ public class GameplayController : MonoBehaviour
     if (stage.GuestNumber < 3)
     {
       stage.Offset = _stageOfSet*stage.Number;
-      Debug.Log("Stage offSet is " + stage.Offset);
       return stage;
     }
     GetRandomStage(count);

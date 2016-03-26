@@ -68,9 +68,7 @@ public class LiftController : MonoBehaviour
   {
     if (collider.name.Contains("Stage"))
     {
-
       CheckStageStay(collider);
-
     }
   }
 

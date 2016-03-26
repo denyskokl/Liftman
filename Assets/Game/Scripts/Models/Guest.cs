@@ -10,6 +10,7 @@ public class Guest : MonoBehaviour
 
   public bool IsClaimed;
   private float lifeDuration;
+    private Rigidbody2D _rigidbody;  
 
   public Guest(int stageNumber, int destination, float lifeTime)
   {
@@ -17,6 +18,11 @@ public class Guest : MonoBehaviour
     Destination = destination;
     LifeTime = lifeTime;
   }
+
+  void Awake()
+    {
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }  
 
   void Start()
   {
@@ -39,7 +45,7 @@ public class Guest : MonoBehaviour
 
   private void MoveGuest()
   {
-    transform.DOLocalMoveX(-7.8f, 6f).OnComplete(StopMoving);
+        _rigidbody.AddForce(new Vector2(-4, 0), ForceMode2D.Force);  
   }
 
   private void StopMoving()
