@@ -10,6 +10,8 @@ public class Guest : MonoBehaviour
     public bool IsClaimed;
     private float lifeDuration;
     private Rigidbody2D _rigidbody;
+    private GameObject _lift;
+    private GameplayController _gamePlayController;
 
     public Guest(int stageNumber, int destination, float lifeTime)
     {
@@ -21,6 +23,9 @@ public class Guest : MonoBehaviour
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _lift =  FindObjectOfType<LiftController>().gameObject;
+        _gamePlayController = FindObjectOfType<GameplayController>();
+
     }
 
     void Start()
@@ -32,6 +37,8 @@ public class Guest : MonoBehaviour
     // Temporal coordinates. Fix it
     public void MoveIn()
     {
+        transform.SetParent(_lift.transform);
+        _rigidbody.isKinematic = true;
         GetComponent<Animator>().Play("Moving");
         transform.DOMoveX(-0.3f, 2f).OnComplete(StopAnimation);
         IsClaimed = true;
@@ -40,6 +47,7 @@ public class Guest : MonoBehaviour
     // Temporal coordinates Fix it
     public void MoveOut()
     {
+        transform.SetParent(_gamePlayController.gameObject.transform);
         GetComponent<SpriteRenderer>().flipX = false;
         GetComponent<Animator>().Play("Moving");
         transform.DOMoveX(0.6f, 3).OnComplete(StopAnimation).OnComplete(Destroy);

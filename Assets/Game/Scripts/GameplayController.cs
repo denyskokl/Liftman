@@ -10,11 +10,11 @@ public class GameplayController : MonoBehaviour
 {
     public static List<GameObject> Guests;
 
+
     //  private static List<Stage> _stages;
 
     [SerializeField]
     private List<Floor> _stages;
-
     private const float GuestLifeTime = 15;
 
     [SerializeField]
