@@ -3,75 +3,63 @@ using UnityEngine;
 
 public class Guest : MonoBehaviour
 {
-    public int StageNumber { get; set; }
-    public int Destination { get; set; }
-    public float LifeTime { get; set; }
+  public int StageNumber { get; set; }
+  public int Destination { get; set; }
+  public float LifeTime { get; set; }
 
-    public bool IsClaimed;
-    private float lifeDuration;
-    private Rigidbody2D _rigidbody;
+  public bool IsClaimed;
+  private float lifeDuration;
+  private Rigidbody2D _rigidbody;
 
-    public Guest(int stageNumber, int destination, float lifeTime)
-    {
-        StageNumber = stageNumber;
-        Destination = destination;
-        LifeTime = lifeTime;
-    }
+  public Guest(int stageNumber, int destination, float lifeTime)
+  {
+    StageNumber = stageNumber;
+    Destination = destination;
+    LifeTime = lifeTime;
+  }
 
-    void Awake()
-    {
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
+  void Awake()
+  {
+    _rigidbody = GetComponent<Rigidbody2D>();
+  }
 
-    void Start()
-    {
-        MoveGuest();
-    }
-
-
-    // Temporal coordinates. Fix it
-    public void MoveIn()
-    {
-        GetComponent<Animator>().Play("Moving");
-        transform.DOMoveX(-0.3f, 2f).OnComplete(StopAnimation);
-        IsClaimed = true;
-    }
-
-    // Temporal coordinates Fix it
-    public void MoveOut()
-    {
-        GetComponent<SpriteRenderer>().flipX = false;
-        GetComponent<Animator>().Play("Moving");
-        transform.DOMoveX(0.6f, 3).OnComplete(StopAnimation).OnComplete(Destroy);
-    }
-
-    private void MoveGuest()
-    {
-        transform.DOLocalMoveX(-0.1f, 3).OnComplete(StopAnimation);
-    }
+  void Start()
+  {
+    MoveGuest();
+  }
 
 
-    private void StopAnimation()
-    {
-        GetComponent<Animator>().StopPlayback();
-    }
+  // Temporal coordinates. Fix it
+  public void MoveIn()
+  {
+    GetComponent<Animator>().Play("Moving");
+    transform.DOMoveX(-0.3f, 2f).OnComplete(StopAnimation);
+    IsClaimed = true;
+  }
 
-    private void StopMoving()
-    {
-        Invoke("MoveBack", 1f);
-    }
+  // Temporal coordinates Fix it
+  public void MoveOut()
+  {
+    GetComponent<SpriteRenderer>().flipX = false;
+    GetComponent<Animator>().Play("Moving");
+    transform.DOMoveX(0.6f, 3).OnComplete(StopAnimation).OnComplete(Destroy);
+  }
+
+  private void MoveGuest()
+  {
+    GetComponent<Animator>().Play("Moving");
+    transform.DOLocalMoveX(-0.1f, 3).OnComplete(StopAnimation);
+  }
 
 
-    private void MoveBack()
-    {
-        transform.rotation = Quaternion.Euler(Vector3.back);
-        transform.DOLocalMoveX(160f, 8f).OnComplete(Destroy);
-    }
+  private void StopAnimation()
+  {
+    GetComponent<Animator>().Play("Idle");
+  }
 
-
-    public void Destroy()
-    {
-        GameplayController.RemoveGuest(gameObject);
-        Destroy(gameObject);
-    }
+  public void Destroy()
+  {
+    GameplayController.RemoveGuest(gameObject);
+    Destroy(gameObject);
+  }
 }
