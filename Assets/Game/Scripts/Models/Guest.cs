@@ -63,7 +63,7 @@ public class Guest : MonoBehaviour
 
   public void Destroy()
   {
-    GameplayController.RemoveGuest(gameObject);
+//    GameplayController.RemoveGuest(gameObject);
     Destroy(gameObject);
   }
 }
