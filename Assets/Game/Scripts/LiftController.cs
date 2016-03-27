@@ -20,10 +20,10 @@ public class LiftController : MonoBehaviour
     OnStageStay += (int stage) =>
     {
         IsCanMove = false;
-//        StartCoroutine(StartTimer(4, () =>
-//        {
-//            IsCanMove = true;
-//        }));
+        StartCoroutine(StartTimer(4, () =>
+        {
+            IsCanMove = true;
+        }));
 
     };
   }
