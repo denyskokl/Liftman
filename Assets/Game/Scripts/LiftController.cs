@@ -4,8 +4,6 @@ using System.Collections;
 
 public class LiftController : MonoBehaviour
 {
-  private Vector3 MouseLastPosition;
-
   public float Speed;
   public float SpeedWheel;
   public static Action<int> OnStageStay { get; set; } 
