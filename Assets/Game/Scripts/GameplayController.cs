@@ -79,6 +79,7 @@ public class GameplayController : MonoBehaviour
     {
         guest.StageNumber = floor.Number;
         guest.Destination = Random.Range(1, 10);
+        guest.LifeTime = GuestLifeTime;
         floor.GuestNumber += 1;
     }
 

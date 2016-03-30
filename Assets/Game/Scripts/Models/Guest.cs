@@ -1,5 +1,8 @@
 ﻿using DG.Tweening;
+using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Guest : MonoBehaviour
 {
@@ -7,8 +10,10 @@ public class Guest : MonoBehaviour
     public int Destination { get; set; }
     public float LifeTime { get; set; }
 
+
     public bool IsClaimed;
-    private float lifeDuration;
+    [SerializeField]
+    private Text destinationText;
     private Rigidbody2D _rigidbody;
     private GameObject _lift;
     private GameplayController _gamePlayController;
@@ -25,14 +30,28 @@ public class Guest : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _lift =  FindObjectOfType<LiftController>().gameObject;
         _gamePlayController = FindObjectOfType<GameplayController>();
+      
+        StartCoroutine(TimeTrigger(() => Destroy()));
 
     }
 
     void Start()
     {
+        destinationText.text = Destination.ToString();
         MoveGuest();
     }
 
+
+    IEnumerator TimeTrigger(Action callback)
+    {
+        yield return new WaitForSeconds(1);
+        while (LifeTime >= 0)
+        {
+            LifeTime--;
+            yield return new WaitForSeconds(1);
+        }
+        callback();
+    }
 
     // Temporal coordinates. Fix it
     public void MoveIn()
@@ -47,6 +66,7 @@ public class Guest : MonoBehaviour
     // Temporal coordinates Fix it
     public void MoveOut()
     {
+        _rigidbody.isKinematic = false;
         transform.SetParent(_gamePlayController.gameObject.transform);
         GetComponent<SpriteRenderer>().flipX = false;
         GetComponent<Animator>().Play("Moving");
