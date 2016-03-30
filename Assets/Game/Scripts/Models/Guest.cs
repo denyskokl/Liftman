@@ -13,7 +13,7 @@ public class Guest : MonoBehaviour
 
     public bool IsClaimed;
     [SerializeField]
-    private Text destinationText;
+	private Text destinationText;
     private Rigidbody2D _rigidbody;
     private GameObject _lift;
     private GameplayController _gamePlayController;
@@ -31,7 +31,7 @@ public class Guest : MonoBehaviour
         _lift =  FindObjectOfType<LiftController>().gameObject;
         _gamePlayController = FindObjectOfType<GameplayController>();
 
-        StartCoroutine(TimeTrigger(() => Destroy()));
+//        StartCoroutine(TimeTrigger(() => Destroy()));
 
     }
 
