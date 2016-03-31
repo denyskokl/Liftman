@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 using System.Linq;
 using Random = UnityEngine.Random;
-
+using System.Collections;
 
 public class GameplayController : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class GameplayController : MonoBehaviour
 
     [SerializeField]
     private List<Floor> _stages;
-    private const float GuestLifeTime = 15;
+    public float GuestLifeTime = 25;
 
     [SerializeField]
     private GameObject _guest;
@@ -82,7 +82,7 @@ public class GameplayController : MonoBehaviour
         guest.LifeTime = GuestLifeTime;
         floor.GuestNumber += 1;
     }
-
+ 
     private Floor GetRandomStage(int count = 1)
     {
         if (count > 11) return null;
@@ -98,11 +98,11 @@ public class GameplayController : MonoBehaviour
     }
 
 
-      
-      public static void RemoveGuest(GameObject guest)
-      {
+
+    public static void RemoveGuest(GameObject guest)
+    {
         if (Guests.Count > 0)
-          Guests.Remove(guest);
-      }
+            Guests.Remove(guest);
+    }
 }
 
