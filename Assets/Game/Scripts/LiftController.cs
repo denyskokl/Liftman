@@ -7,10 +7,11 @@ public class LiftController : MonoBehaviour
   public float Speed;
   public float SpeedWheel;
   public static Action<int> OnStageStay { get; set; } 
-     
+       
   private Rigidbody2D _rigidbody2D;
   private int _currentStage;
   private bool IsCanMove = true;
+    
 
   void Awake()
   {

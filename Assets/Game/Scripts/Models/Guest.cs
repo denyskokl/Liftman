@@ -11,12 +11,13 @@ public class Guest : MonoBehaviour
     public float LifeTime { get; set; }
 
 
+    public float StayPosition;
     public bool IsClaimed;
+
     [SerializeField]
     private Text destinationText;
     [SerializeField]
     private Image _patienceBar;
-
     private Rigidbody2D _rigidbody;
     private GameObject _lift;
     private GameplayController _gamePlayController;
@@ -34,7 +35,6 @@ public class Guest : MonoBehaviour
         _lift = FindObjectOfType<LiftController>().gameObject;
         _gamePlayController = FindObjectOfType<GameplayController>();
          StartCoroutine(TimeTrigger(() => MoveOut()));
-
     }
 
     void Start()
@@ -70,12 +70,12 @@ public class Guest : MonoBehaviour
 
     
     // Temporal coordinates. Fix it
-    public void MoveIn()
+    public void MoveIn(float position)
     {
         transform.SetParent(_lift.transform);
         _rigidbody.isKinematic = true;
         GetComponent<Animator>().Play("Moving");
-        transform.DOMoveX(-0.3f, 2f).OnComplete(StopAnimation);
+        transform.DOMoveX(position, 2f).OnComplete(StopAnimation);
         IsClaimed = true;
     }
 
