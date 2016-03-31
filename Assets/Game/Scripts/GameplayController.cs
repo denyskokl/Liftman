@@ -9,26 +9,19 @@ using Random = UnityEngine.Random;
 public class GameplayController : MonoBehaviour
 {
     public static List<GameObject> Guests;
+    public static List<GameObject> LiftGuests;
+    public const int MAX_LIFT_GUESTS = 3;
 
 
     //  private static List<Stage> _stages;
 
+    private const float GuestLifeTime = 15;
     [SerializeField]
     private List<Floor> _stages;
-    private const float GuestLifeTime = 15;
-
+    [SerializeField]
+    private List<GameObject> _liftStayPositions;
     [SerializeField]
     private GameObject _guest;
-
-
-    public void Init()
-    {
-        //    _stages = new List<Stage>();
-        //    for (int i = 1; i <= MaxStage; i++)
-        //    {
-        //      _stages.Add(new Stage(i));
-        //    }
-    }
 
     void Awake()
     {
@@ -37,8 +30,8 @@ public class GameplayController : MonoBehaviour
 
     void Start()
     {
+        LiftGuests = new List<GameObject>();
         Guests = new List<GameObject>();
-        //    Init();
         InvokeRepeating("InitGuest", 0, 10);
     }
 
@@ -49,9 +42,23 @@ public class GameplayController : MonoBehaviour
         {
             var guest = item.GetComponent<Guest>();
             if (guest.Destination == stageNumber && guest.IsClaimed)
+            {
+                var stayObj = _liftStayPositions.Where(obj => obj.transform.position.x == guest.StayPosition).First();
+                stayObj.SetActive(false);
+                LiftGuests.Remove(item);
                 guest.MoveOut();
-            if (guest.StageNumber == stageNumber && !guest.IsClaimed)
-                guest.MoveIn();
+            }
+
+            if (guest.StageNumber == stageNumber && !guest.IsClaimed && LiftGuests.Count < 3)
+            {
+                var stayObj = _liftStayPositions.Where(obj => obj.activeSelf == false).First();
+                stayObj.SetActive(true);
+                var stayPosition = stayObj.transform.position.x;
+                guest.StayPosition = stayPosition;
+                LiftGuests.Add(item);
+                guest.MoveIn(stayPosition);
+            }
+
         }
     }
 
@@ -78,31 +85,40 @@ public class GameplayController : MonoBehaviour
     private void SetGuestValues(Guest guest, Floor floor)
     {
         guest.StageNumber = floor.Number;
-        guest.Destination = Random.Range(1, 10);
+        int destination = Random.Range(1, 11);
+        if (destination == floor.Number)
+        {
+            while (destination == floor.Number)
+            {
+                destination = Random.Range(1, 11);
+            }
+        }
+
+        guest.Destination = destination;
         guest.LifeTime = GuestLifeTime;
         floor.GuestNumber += 1;
     }
 
     private Floor GetRandomStage(int count = 1)
+{
+    if (count > 11) return null;
+    count++;
+    var currentStage = _stages[Random.RandomRange(0, 10)];
+    if (currentStage.GuestNumber < 3)
     {
-        if (count > 11) return null;
-        count++;
-        var currentStage = _stages[Random.RandomRange(0, 10)];
-        if (currentStage.GuestNumber < 3)
-        {
 
-            return _stages.FirstOrDefault(f => f.Number.Equals(currentStage.Number));
-        }
-        GetRandomStage(count);
-        return null;
+        return _stages.FirstOrDefault(f => f.Number.Equals(currentStage.Number));
     }
+    GetRandomStage(count);
+    return null;
+}
 
 
-      
-      public static void RemoveGuest(GameObject guest)
-      {
-        if (Guests.Count > 0)
-          Guests.Remove(guest);
-      }
+
+public static void RemoveGuest(GameObject guest)
+{
+    if (Guests.Count > 0)
+        Guests.Remove(guest);
+}
 }
 
