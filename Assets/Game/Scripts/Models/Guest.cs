@@ -9,6 +9,7 @@ public class Guest : MonoBehaviour
     public int StageNumber { get; set; }
     public int Destination { get; set; }
     public float LifeTime { get; set; }
+   
 
 
     public float StayPosition;

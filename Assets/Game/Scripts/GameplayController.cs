@@ -5,6 +5,7 @@ using DG.Tweening;
 using System.Linq;
 using Random = UnityEngine.Random;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameplayController : MonoBehaviour
 {
@@ -24,6 +25,10 @@ public class GameplayController : MonoBehaviour
 
     [SerializeField]
     private GameObject _guest;
+    [SerializeField]
+    private Text _score;
+
+    public int Score { get; set; }
 
     void Awake()
     {
@@ -36,7 +41,21 @@ public class GameplayController : MonoBehaviour
         Guests = new List<GameObject>();
         InvokeRepeating("InitGuest", 0, 10);
     }
+    
 
+    void Update()
+    {
+        UpdateHud();
+    }
+
+    private void UpdateHud()
+    {
+        foreach (var item in Guests)
+        {
+            var guest = item.GetComponent<Guest>();
+            _score.text = Score.ToString();
+        }
+    }
 
     void GuestLanding(int stageNumber)
     {
@@ -49,6 +68,7 @@ public class GameplayController : MonoBehaviour
                 stayObj.SetActive(false);
                 LiftGuests.Remove(item);
                 guest.MoveOut();
+                Score++;
             }
 
             if (guest.StageNumber == stageNumber && !guest.IsClaimed && LiftGuests.Count < 3)
