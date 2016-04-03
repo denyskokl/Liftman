@@ -43,7 +43,7 @@ public class GameplayController : MonoBehaviour
         foreach (var item in Guests)
         {
             var guest = item.GetComponent<Guest>();
-            if (guest.Destination == stageNumber && guest.IsClaimed)
+            if (guest.Destination == stageNumber && guest.IsClaimed || guest.IsClaimed && guest.IsTimeLeft)
             {
                 var stayObj = _liftStayPositions.Where(obj => obj.transform.position.x == guest.StayPosition).First();
                 stayObj.SetActive(false);

@@ -13,6 +13,7 @@ public class Guest : MonoBehaviour
 
     public float StayPosition;
     public bool IsClaimed;
+    public bool IsTimeLeft;
 
     [SerializeField]
     private Text destinationText;
@@ -21,6 +22,8 @@ public class Guest : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private GameObject _lift;
     private GameplayController _gamePlayController;
+    private IEnumerator timeTrigger;
+    private Action _lifeTriggerCallback;
 
     public Guest(int stageNumber, int destination, float lifeTime)
     {
@@ -34,7 +37,8 @@ public class Guest : MonoBehaviour
         _rigidbody = GetComponent<Rigidbody2D>();
         _lift = FindObjectOfType<LiftController>().gameObject;
         _gamePlayController = FindObjectOfType<GameplayController>();
-         StartCoroutine(TimeTrigger(() => MoveOut()));
+        timeTrigger = TimeTrigger();
+        StartCoroutine(timeTrigger);
     }
 
     void Start()
@@ -43,27 +47,27 @@ public class Guest : MonoBehaviour
         MoveGuest();
     }
 
-
-    IEnumerator TimeTrigger(Action callback)
+    void Update()
+    {
+        if (!IsClaimed && IsTimeLeft)
+            MoveOut();
+    }
+    IEnumerator TimeTrigger()
     {
         yield return new WaitForSeconds(1);
         while (LifeTime >= 0)
         {
-            
             LifeTime--;
             PatienceBar();
-             yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1);
         }
-        callback();
+        IsTimeLeft = true;
+        if(_lifeTriggerCallback != null)
+            _lifeTriggerCallback();
     }
 
     private void PatienceBar()
     {
-        if(IsClaimed)
-        {
-          //todo need logic to update time patience guest
-            LifeTime = _gamePlayController.GuestLifeTime;
-        }
         var amount = LifeTime / _gamePlayController.GuestLifeTime;
         _patienceBar.fillAmount = amount;
     }
@@ -71,15 +75,18 @@ public class Guest : MonoBehaviour
     
     // Temporal coordinates. Fix it
     public void MoveIn(float position)
-    {
+    {   
         transform.SetParent(_lift.transform);
         _rigidbody.isKinematic = true;
         GetComponent<Animator>().Play("Moving");
         transform.DOMoveX(position, 2f).OnComplete(StopAnimation);
         IsClaimed = true;
+        LifeTime = _gamePlayController.GuestLifeTime;
+        StopCoroutine(timeTrigger);
+        StartCoroutine(timeTrigger);
+
     }
 
-    // Temporal coordinates Fix it
     public void MoveOut()
     {
         _rigidbody.isKinematic = false;
