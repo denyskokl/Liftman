@@ -15,6 +15,7 @@ public class LiftController : MonoBehaviour
 
   void Awake()
   {
+     CreditsManager.Instance.GiveCurrency(10);
     _rigidbody2D = GetComponent<Rigidbody2D>();
     OnStageStay += (int stage) =>
     {
@@ -81,7 +82,7 @@ public class LiftController : MonoBehaviour
         _rigidbody2D.velocity = Vector2.zero;
         AudioManager.CreatePlayAudioObject(AudioManager.ins.sfxLiftOpen);
         var stageNumber = collider.name.Split(new char[]{' '}, StringSplitOptions.RemoveEmptyEntries)[1];
-       _currentStage = Int32.Parse(stageNumber);
+       _currentStage = int.Parse(stageNumber);
          if(OnStageStay != null)
             OnStageStay(_currentStage);
         Debug.Log(_currentStage);

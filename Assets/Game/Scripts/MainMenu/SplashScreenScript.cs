@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Soomla.Profile;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SplashScreenScript : MonoBehaviour {
@@ -9,6 +10,11 @@ public class SplashScreenScript : MonoBehaviour {
 	void Start () {
 		startGame = 10;
 	}
+
+    void Awake()
+    {
+        SoomlaProfile.Initialize();
+    }
 
 	// Update is called once per frame
 	void Update () {

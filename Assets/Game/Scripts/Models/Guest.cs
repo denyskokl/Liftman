@@ -80,19 +80,22 @@ public class Guest : MonoBehaviour
         transform.SetParent(_lift.transform);
         _rigidbody.isKinematic = true;
         GetComponent<Animator>().Play("Moving");
-        transform.DOMoveX(position, 2f).OnComplete(StopAnimation);
-        IsClaimed = true;
-        LifeTime = _gamePlayController.GuestLifeTime;
-        StopCoroutine(timeTrigger);
-        StartCoroutine(timeTrigger);
-
+        transform.DOMoveX(position, 2f).OnComplete( () => {
+            StopAnimation();
+            GetComponent<SpriteRenderer>().flipX = false;
+            IsClaimed = true;
+            GetComponent<SpriteRenderer>().flipX = false;
+            LifeTime = _gamePlayController.GuestLifeTime;
+            StopCoroutine(timeTrigger);
+            StartCoroutine(timeTrigger);
+        });
     }
 
     public void MoveOut()
     {
         _rigidbody.isKinematic = false;
         transform.SetParent(_gamePlayController.gameObject.transform);
-        GetComponent<SpriteRenderer>().flipX = false;
+        
         GetComponent<Animator>().Play("Moving");
         transform.DOMoveX(0.6f, 3).OnComplete(StopAnimation).OnComplete(Destroy);
     }

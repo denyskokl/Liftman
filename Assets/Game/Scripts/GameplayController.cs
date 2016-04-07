@@ -68,7 +68,8 @@ public class GameplayController : MonoBehaviour
                 stayObj.SetActive(false);
                 LiftGuests.Remove(item);
                 guest.MoveOut();
-                Score++;
+                if(!guest.IsTimeLeft)
+                    Score++;
             }
 
             if (guest.StageNumber == stageNumber && !guest.IsClaimed && LiftGuests.Count < 3)
@@ -107,12 +108,12 @@ public class GameplayController : MonoBehaviour
     private void SetGuestValues(Guest guest, Floor floor)
     {
         guest.StageNumber = floor.Number;
-        int destination = Random.Range(1, 11);
+        int destination = Random.Range(0, 10);
         if (destination == floor.Number)
         {
             while (destination == floor.Number)
             {
-                destination = Random.Range(1, 11);
+                destination = Random.Range(0, 10);
             }
         }
 
