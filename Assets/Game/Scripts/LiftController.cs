@@ -74,7 +74,6 @@ public class LiftController : MonoBehaviour
 
   private void CheckStageStay(Collider2D collider)
   {
-    Debug.Log(collider.name);
     StartCoroutine(StartTimer(1, () =>
     {
       if(_rigidbody2D.IsTouching(collider))
@@ -85,7 +84,7 @@ public class LiftController : MonoBehaviour
        _currentStage = int.Parse(stageNumber);
          if(OnStageStay != null)
             OnStageStay(_currentStage);
-        Debug.Log(_currentStage);
+//        Debug.Log(_currentStage);
 
       }
     }));
