@@ -23,4 +23,9 @@ public class GameOver : MonoBehaviour
     yield return new WaitForSeconds(3.1f);
     Time.timeScale = 0;
   }
+
+  public void Share()
+  {
+
+  }
 }
