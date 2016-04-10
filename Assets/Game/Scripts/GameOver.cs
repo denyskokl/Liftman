@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class GameOver : MonoBehaviour
 {
@@ -11,9 +12,21 @@ public class GameOver : MonoBehaviour
 
   }
 
-  private void ShowGameOver()
-  {
-    Time.timeScale=0;
-    transform.GetChild(0).gameObject.SetActive(true);
-  }
+   private void ShowGameOver()
+   {
+
+       var panel = transform.GetChild(0).gameObject;
+       panel.transform.localScale = Vector3.zero;
+       panel.transform.DOScale(Vector3.one, 3f);
+       panel.SetActive(true);
+       count ++;
+       StartCoroutine(Pause());
+
+   }
+
+    IEnumerator Pause()
+    {
+      yield return new WaitForSeconds(3.1f);
+      Time.timeScale = 0;
+    }
 }

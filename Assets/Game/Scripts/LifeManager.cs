@@ -35,6 +35,7 @@ public class LifeManager : MonoBehaviour
     if (Life <= 0)
     {
       OnGameOver();
+
     }
   }
 }
