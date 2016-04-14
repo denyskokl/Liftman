@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class ShareImageCanvas : MonoBehaviour
 {
   private bool isProcessing = false;
-  public Canvas canvasForHide;
   public Canvas canvasLogo;
   public string message;
 
 
   public void ButtonShare()
   {
-    canvasForHide.enabled = false;
     canvasLogo.enabled = true;
 
     if (!isProcessing)
@@ -37,11 +35,11 @@ public class ShareImageCanvas : MonoBehaviour
     screenTexture.Apply();
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- PHOTO
     byte[] dataToSave = screenTexture.EncodeToPNG();
-    string destination = Path.Combine(Application.persistentDataPath,
-      System.DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + ".png");
+    string destination = Application.persistentDataPath + "/MyImage.png";
     File.WriteAllBytes(destination, dataToSave);
     if (!Application.isEditor)
     {
+//#if UNITY_ANDROID
       // block to open the file and share it ------------START
       AndroidJavaClass intentClass = new AndroidJavaClass("android.content.Intent");
       AndroidJavaObject intentObject = new AndroidJavaObject("android.content.Intent");
@@ -59,9 +57,51 @@ public class ShareImageCanvas : MonoBehaviour
       AndroidJavaObject currentActivity = unity.GetStatic<AndroidJavaObject>("currentActivity");
 
       currentActivity.Call("startActivity", intentObject);
+//    #elif UNITY_IOS
+//    		CallSocialShareAdvanced(message, imagePath);
+//    #else
+//      Debug.Log("No sharing set up for this platform.");
+//#endif
+//    }
+//    isProcessing = false;
+//    canvasLogo.enabled = false;
+//  }
+//
+//#if UNITY_IOS
+//  	public struct ConfigStruct
+//  	{
+//  		public string title;
+//  		public string message;
+//  	}
+//
+//  	[DllImport ("__Internal")] private static extern void showAlertMessage(ref ConfigStruct conf);
+//
+//  	public struct SocialSharingStruct
+//  	{
+//  		public string text;
+//  		public string image;
+//
+//  	}
+//
+//  	[DllImport ("__Internal")] private static extern void showSocialSharing(ref SocialSharingStruct conf);
+//
+//  	public static void CallSocialShare(string title, string message)
+//  	{
+//  		ConfigStruct conf = new ConfigStruct();
+//  		conf.title  = title;
+//  		conf.message = message;
+//  		showAlertMessage(ref conf);
+//  	}
+//
+//  	public static void CallSocialShareAdvanced(string defaultTxt, string img)
+//  	{
+//  		SocialSharingStruct conf = new SocialSharingStruct();
+//  		conf.text = defaultTxt;
+//  		conf.image = img;
+//
+//  		showSocialSharing(ref conf);
+//  	}
+//  #endif
     }
-    isProcessing = false;
-    canvasForHide.enabled = true;
-    canvasLogo.enabled = false;
   }
 }

@@ -21,11 +21,6 @@ public class GameOver : MonoBehaviour
   IEnumerator Pause()
   {
     yield return new WaitForSeconds(3.1f);
-    Time.timeScale = 0;
-  }
-
-  public void Share()
-  {
-
+    Time.timeScale = 0.000001f;
   }
 }
